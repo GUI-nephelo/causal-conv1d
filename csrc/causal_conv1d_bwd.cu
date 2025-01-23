@@ -255,15 +255,15 @@ void causal_conv1d_bwd_launch(ConvParamsBwd &params, cudaStream_t stream) {
             auto kernel = &causal_conv1d_bwd_kernel<Ktraits>;
 
             if (kSmemSize >= 48 * 1024) {
-                #ifndef USE_ROCM
+                // #ifndef USE_ROCM
                 C10_CUDA_CHECK(cudaFuncSetAttribute(
                     kernel, cudaFuncAttributeMaxDynamicSharedMemorySize, kSmemSize));
-                #else
-                // There is a slight signature discrepancy in HIP and CUDA "FuncSetAttribute" function.
-                C10_CUDA_CHECK(cudaFuncSetAttribute(
-                    (void *) kernel, cudaFuncAttributeMaxDynamicSharedMemorySize, kSmemSize));
-                std::cerr << "Warning (causal_conv1d bwd launch): attempting to set maxDynamicSharedMemorySize on an AMD GPU which is currently a non-op (in ROCm versions <= 6.1). This might lead to undefined behavior. \n" << std::endl;
-                #endif
+                // #else
+                // // There is a slight signature discrepancy in HIP and CUDA "FuncSetAttribute" function.
+                // C10_CUDA_CHECK(cudaFuncSetAttribute(
+                //     (void *) kernel, cudaFuncAttributeMaxDynamicSharedMemorySize, kSmemSize));
+                // std::cerr << "Warning (causal_conv1d bwd launch): attempting to set maxDynamicSharedMemorySize on an AMD GPU which is currently a non-op (in ROCm versions <= 6.1). This might lead to undefined behavior. \n" << std::endl;
+                // #endif
             }
 
 

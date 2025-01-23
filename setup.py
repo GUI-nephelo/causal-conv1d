@@ -237,6 +237,7 @@ if not SKIP_CUDA_BUILD:
                 "csrc/causal_conv1d_bwd.cu",
                 "csrc/causal_conv1d_update.cu",
             ],
+            library_dirs=[ CUDA_HOME+"/lib"],
             extra_compile_args=extra_compile_args,
             include_dirs=[Path(this_dir) / "csrc" / "causal_conv1d"],
         )

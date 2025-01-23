@@ -1,5 +1,7 @@
 # Causal depthwise conv1d in CUDA with a PyTorch interface
 
+## Forked from https://github.com/Dao-AILab/causal-conv1d a windows version
+
 Features:
 - Support fp32, fp16, bf16.
 - Kernel size 2, 3, 4.
